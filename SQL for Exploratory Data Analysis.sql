@@ -172,12 +172,12 @@ WHERE revenue in (SELECT TOP(25) PERCENT revenue
 				ORDER BY revenue)
 
 --QUARTILE 3 (75%) = 1692.75
-SELECT min(revenue) FROM dbo.Sales
+SELECT MIX(revenue) FROM dbo.Sales
 WHERE revenue in (SELECT TOP(25) PERCENT revenue
 				FROM dbo.Sales 
 				ORDER BY revenue DESC)
 
---IRQ (Inter Quartile range) = 3rd - 1st = 1692.75 - 133.64 = 1559.11
+--IRQ (Inter Quartile Range) = 3rd - 1st = 1692.75 - 133.64 = 1559.11
 ---> we can find out the outliers that are not in IRQ 
 
 --STEP4: Identify Significant Correlations
@@ -187,6 +187,6 @@ WHERE revenue in (SELECT TOP(25) PERCENT revenue
 SELECT ((Avg(amount * revenue) - (Avg(amount) * Avg(revenue))) / (StDev(amount) * StDev(revenue))) AS 'Cor_amount_revenue'
 FROM dbo.Sales
 
-------There is one step we need to do in EDA. That is visualization the distribution but SQL servel does not support so you can do it in excel or other program
+------There is one step we need to do in EDA. That is visualization the data distribution but SQL servel does not support so you can do it in excel or other programs
 
 
